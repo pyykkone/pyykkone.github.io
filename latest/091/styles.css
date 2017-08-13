@@ -1,0 +1,97 @@
+
+
+
+html, body {
+	
+	background-color: white;
+	font-size:30px;
+	font-family: Avant Garde,Avantgarde,Century Gothic,CenturyGothic,AppleGothic,sans-serif; 
+	
+}
+
+#inputs {
+	height: 10%;
+	width: 100%;
+	float: left;
+}
+
+#pictureFrame {
+	width: 90%;
+	height: 50%;
+	float: right;
+}
+
+#pictureList {
+		width: 10%;
+		height: 90%;
+		float: left;
+}
+
+
+.picture {
+	max-width: 100%;
+    height: auto;
+}
+
+
+/* Not in use ATM: */
+.tooltip {
+	visibility: hidden;
+	position: absolute;
+	opacity: 0.7;
+	margin-left: 5%;
+}
+
+.gallery {
+    border: 1px solid #ccc;
+	margin: 2px;
+	width: 90px;
+}
+.gallery.selected {
+	border: 3px solid #777;
+}
+
+
+/*
+div.gallery:hover {
+    border: 1px solid #777;
+}
+*/
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.responsive {
+    padding: 0 0px;
+    float: left;
+    width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px){
+    .responsive {
+        width: 49.99999%;
+        margin: 6px 0;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    .responsive {
+        width: 100%;
+    }
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
