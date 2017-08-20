@@ -2,61 +2,66 @@
 <head>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+<script src="https://www.w3schools.com/lib/w3.js"></script>
 <script src="filelist.json"></script>
-
 
 <script>
 
 
 function listPictures(files) { 
 
-		   
-			
-			
 			for (var i=0;i<files.length;i++) {
 				
 				var div1 = $('<div></div>').addClass('gallery')
 					.mouseenter(function() {
 						
-						// Unselect all & make all tooltips hidden
+						
+						
+						// NOT IN USE: Unselect all & make all tooltips hidden
 						$('.selected').toggleClass('selected');	
-						$('.tooltip').css('visibility','hidden');
+						$('.tooltip').fadeOut('slow')//.css('visibility','hidden');
 						
-						// Select this and make this tooltip visible
-						$(this).toggleClass('selected');
-						$(this).children('.tooltip').css('visibility','visible');
+						// NOT IN USE: // Select this and make this tooltip visible
+						$(this).toggleClass('selected',1000);
+						$(this).children('.tooltip').fadeIn()//.css('visibility','visible');
 						
-					})
-					;
-
-
-
-				var imgToAdd = $('<img src="'+files[i]+'">').css('height','60px').addClass('thumbnail').css('width','80px');
-				
-				
-				imgToAdd.mouseenter(function() {
-					
-					$('.picture').remove();
-					var imgToAdd = $('<img src="'+ $(this)[0].src + '">').addClass('picture');
-					$('#pictureFrame').append(imgToAdd);
-					
-				
-				}).on('selectPicture',function() {
-					$('.picture').remove();
-					var imgToAdd = $('<img src="'+ $(this)[0].src + '">').addClass('picture');
-					$('#pictureFrame').append(imgToAdd);
-
 				});
 				
-				
-				
-				div1.append(imgToAdd).on('mouseout',function() {  $('.tooltip').css('visibility','hidden'); })  ;
-				
-				// If a tooltip if wanted: 
-				//div1.append('<p class="tooltip">' + files[i].split('current\\')[1] + '</p>');
-				
-				$('#pictureList').append(div1);
+				if (files[i].indexOf('.html')>-1) {
+					// Add html element
+					//var imgToAdd = $().get(files[i]).css('height','60px').addClass('thumbnail').css('width','80px');
+					 $(function () {
+						$.get(files[i], function (data) {
+							$("#pictureList").append(data);
+						});
+					});
+					
+					
+				} else {
+						// Assumption that if not html then image
+						var imgToAdd = $('<img src="'+files[i]+'">').css('height','60px').addClass('thumbnail').css('width','80px');
+					
+					imgToAdd.mouseenter(function() {
+						
+						$(this).trigger('selectPicture');
+						//$('.picture').attr('src',$(this)[0].src);
+						
+					}).on('selectPicture',function() {
+						
+						$('.picture').hide();
+						$('.picture').attr('src',$(this)[0].src);
+						$('.picture').fadeIn('slow')
+						
+					});
+					
+					div1.append(imgToAdd).on('mouseout',function() {  $('.tooltip').css('visibility','hidden'); })  ;
+					
+					// Add a tooltip if wanted: 
+					//div1.append('<p class="tooltip">' + files[i].split('current\\')[1] + '</p>');
+					
+					
+					$('#pictureList').append(div1);
+					} // End else 
 			}
 
 }
@@ -64,7 +69,14 @@ function listPictures(files) {
 
 $(document).ready(function() {
     console.log( "ready!" );
+	
+	// And empty img-tag with picture class
+	var imgToAdd = $('<img src=""></img>').addClass('picture')
+	
+	$('#pictureFrame').append(imgToAdd);
 	listPictures(files);
+
+
 	
 });
 
