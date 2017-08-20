@@ -11,10 +11,13 @@
 function listPictures(files) { 
 
 			for (var i=0;i<files.length;i++) {
+				console.log('For-loop:'+i);
 				
 				var div1 = $('<div></div>').addClass('gallery')
 					.mouseenter(function() {
-						
+						$('.selected').toggleClass('selected');	
+						$(this).toggleClass('selected',1000);
+						/*
 						
 						
 						// NOT IN USE: Unselect all & make all tooltips hidden
@@ -25,16 +28,20 @@ function listPictures(files) {
 						$(this).toggleClass('selected',1000);
 						$(this).children('.tooltip').fadeIn()//.css('visibility','visible');
 						
+						*/
+						
 				});
 				
 				if (files[i].indexOf('.html')>-1) {
 					// Add html element
 					//var imgToAdd = $().get(files[i]).css('height','60px').addClass('thumbnail').css('width','80px');
-					 $(function () {
+					/*
+					$(function () {
 						$.get(files[i], function (data) {
 							$("#pictureList").append(data);
 						});
 					});
+					*/
 					
 					
 				} else {
@@ -44,6 +51,7 @@ function listPictures(files) {
 					imgToAdd.mouseenter(function() {
 						
 						$(this).trigger('selectPicture');
+						return false; 
 						//$('.picture').attr('src',$(this)[0].src);
 						
 					}).on('selectPicture',function() {
@@ -51,10 +59,10 @@ function listPictures(files) {
 						$('.picture').hide();
 						$('.picture').attr('src',$(this)[0].src);
 						$('.picture').fadeIn('slow')
-						
+						return false; 
 					});
 					
-					div1.append(imgToAdd).on('mouseout',function() {  $('.tooltip').css('visibility','hidden'); })  ;
+					div1.append(imgToAdd)//.on('mouseout',function() {  $('.tooltip').css('visibility','hidden'); })  ;
 					
 					// Add a tooltip if wanted: 
 					//div1.append('<p class="tooltip">' + files[i].split('current\\')[1] + '</p>');
@@ -67,18 +75,6 @@ function listPictures(files) {
 }
 
 
-$(document).ready(function() {
-    console.log( "ready!" );
-	
-	// And empty img-tag with picture class
-	var imgToAdd = $('<img src=""></img>').addClass('picture')
-	
-	$('#pictureFrame').append(imgToAdd);
-	listPictures(files);
-
-
-	
-});
 
 $(document).keydown(function(e) {
 						if (e['keyCode']==40) { // Key down
@@ -94,7 +90,7 @@ $(document).keydown(function(e) {
 							} else {
 								// Select the first image if none is selected
 								$('.gallery').first().toggleClass('selected').children('img').trigger('selectPicture');
-								console.log('down boy!');
+								
 							}
 						}
 						if (e['keyCode']==38) { // Key up
@@ -111,8 +107,27 @@ $(document).keydown(function(e) {
 							}
 							
 						}
+						return false;
 						
 });
+
+
+$(document).ready(function() {
+    console.log( "ready!" );
+	
+	// And empty img-tag with picture class
+	var imgToAdd = $('<img src=""></img>').addClass('picture')
+	
+	$('#pictureFrame').append(imgToAdd);
+	
+	
+	listPictures(files);
+	
+
+
+	
+});
+
 
 </script>
 
