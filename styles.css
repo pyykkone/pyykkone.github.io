@@ -1,0 +1,47 @@
+html{
+
+	font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;font-size:16px;
+}
+
+.small-image {
+	width: 4%;
+	height: 3%;
+}
+
+#content {
+	
+	margin: 10%;
+	background-color:grey;
+}
+
+nav {
+	width: 80%;
+
+	margin-left:10%;
+	margin-right: 10%;
+	height: 5%;
+	
+}
+a {
+	color: black;
+}
+a:hover {
+	 text-decoration: underline;
+}
+
+.nav-link {
+	float: right; 
+	margin-right: 10px;
+}
+.no-underline { 
+	text-decoration:none;
+}
+.flex{
+	display:-webkit-box;
+	display:-ms-flexbox;
+	display:flex;
+}
+
+.list-col {
+	border-color: #595756;
+}
