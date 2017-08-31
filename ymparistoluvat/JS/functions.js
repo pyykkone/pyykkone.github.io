@@ -52,6 +52,7 @@ function markerClick(markerID) {
 	list+='<li>'+ marker['type'] + '</li>';
 	//list+='<li>'+ marker['luvanMyontaja'] + '</li>';
 	list+='<li>'+ marker['hakija'] + '</li>';
+	list+='<li>'+ '<a href="https://tietopalvelu.ahtp.fi/Lupa/Lisatiedot.aspx?Asia_ID=' + marker['asiaID'] +'" target="_blank">Luvan tiedot</a>' + '</li>'
 	
 	$('#permitInfo').hide().append(list).fadeIn('slow');
 	
