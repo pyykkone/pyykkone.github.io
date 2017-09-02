@@ -49,7 +49,7 @@ function markerClick(markerID) {
 //	$('<table id="permitInfoTable"></table>').insertAfter('')
 	//$('<thead><tr><th>Asia</th></tr><tr><th></thead>').appendTo('#permitInfo')
 	list='<li>'+ marker['nimi'] + '</li>';
-	list+='<li>'+ marker['käyntiosoite'] + '</li>';
+	list+='<li>'+ marker['kayntiosoite'] + '</li>';
 	//list+='<li>'+ marker['luvanMyontaja'] + '</li>';
 	list+='<li>' + 'Kuntakoodi: ' + marker['kuntakoodi'] + '</li>';
 	list+='<li>' + 'Koordinaatit: ' + marker['lon']+', '+marker['lat'] + '</li>';
@@ -70,7 +70,7 @@ function mapPermits(permits) {
 	
 	permits.forEach(function(item,index) { 
 		popUpString="Nimi: "+item['nimi']+"<br>";
-		popUpString+="Osoite: "+item['käyntiosoite']+"<br>";
+		popUpString+="Osoite: "+item['kayntiosoite']+"<br>";
 		popUpString+='Lon, lat: ' +item['lon']+', '+item['lat']+  "<br>";
 		//popUpString+="Myöntäjä: "+item['luvanMyontaja']+"<br>";
 		
