@@ -1,0 +1,94 @@
+
+html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                background-color: white;
+            }
+
+table {
+	margin: 15%;
+	
+}
+	
+ul {  
+
+	margin : 15%;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 28;
+	list-style-type: circle;
+	
+
+}	
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+	font-size: 1.25em;
+	margin-left: 15px;
+	padding: 5px;
+	
+	font-weight: 700;
+	font-family: "Courier New", Courier, monospace;
+	color: white;
+	background-color: #4CAF50;
+	display: inline-block;
+}
+
+.inputfile + label:hover {
+	background-color: red;
+}
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+
+// Containers
+
+#container {
+	background-color: red;
+	width: 100%;
+	height: 100%;
+    margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+#mapContainer {
+	background-color: green;
+	width: 50%;
+	height: 100%;
+    margin: 0;
+	padding: 0;
+	float: left;
+	position: relative;
+}
+
+#inputContainer {
+	background-color: white;
+	width: 20%;
+	height: 5%;
+	
+	float: right;
+    margin: 2%;
+	margin-right: 20%;
+	padding: 0;
+	position: relative;
+}
+
+#infoContainer {
+	background-color: white;
+	width: 50%;
+	height: 100%;
+	float: right;
+    margin: 0;
+	padding: 0;
+	position: relative;
+}
