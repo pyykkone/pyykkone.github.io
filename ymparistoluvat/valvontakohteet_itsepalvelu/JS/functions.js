@@ -9,7 +9,7 @@ var help;
 // Functions
 
 
-function initMap(x=60.5,y=25) { 
+function initMap(x=65.5,y=25,zoomLevel=5) { 
 
 	map = L.map('mapContainer');
 	
@@ -26,11 +26,13 @@ function initMap(x=60.5,y=25) {
 	var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 15, attribution: osmAttrib});		
 	
 	// start the map in Pasila
-	map.setView(new L.LatLng(x,y),8);
+	map.setView(new L.LatLng(x,y),zoomLevel);
 	map.addLayer(osm);
 
 	//map.on('click', onMapClick);
 }
+
+
 
 
 
@@ -177,6 +179,8 @@ function parsiCSV(textRaw) {
 
 
 
+
+
 // jQuery
 
 $(document).ready(function() {
@@ -202,6 +206,16 @@ $(document).ready(function() {
 			reader.onload = function(e) {
 			
 				enviromentalPermits=parsiCSV(reader.result);
+				
+				// Set map focus based on mean of lon & lat
+				
+				lon_mean = enviromentalPermits.map(function(x) { return(x['lon']) }).reduce(function(x,y) {  return x+y; }) / enviromentalPermits.length;
+				lat_mean = enviromentalPermits.map(function(x) { return(x['lat']) }).reduce(function(x,y) {  return x+y; }) / enviromentalPermits.length
+				
+				// Set view 
+				zoomLevel = 8;
+				map.setView(new L.LatLng(lat_mean,lon_mean),zoomLevel);
+				
 				mapPermits(enviromentalPermits);
 			}
 
