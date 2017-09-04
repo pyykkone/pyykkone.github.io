@@ -128,6 +128,7 @@ function parsiCSV(textRaw) {
 	
 	// List columns assuming to first line is a header line
 	cols = rows[0].split(';');
+	//cols = cols.map(function(x) { return(x.replace('\n','')) })
 	
 	// Log rows vs column
 	console.log('Rivejä: ' +  rows.length);
@@ -159,6 +160,11 @@ function parsiCSV(textRaw) {
 					rtrn['lat'] = Number(x.split(';')[i]);
 					
 				}
+				if (cols[i].substr(0,3)=='lon') {
+					
+					rtrn['lon'] = Number(x.split(';')[i]);
+					
+				}
 				
 		}
 		// Add id based in index to identity each marker
@@ -178,6 +184,20 @@ function parsiCSV(textRaw) {
 }
 
 
+// Conversion from EPSG3067 to WGS84
+
+function coordConversion(x,y) {
+	
+	// -3.04805394167 * ( 0.00000947239 * pkoord)
+	// 18.01485463946 * ( 0.00001792491 * ikoord)
+	
+	x =  -3.04805394167 + ( 0.00000947239 * x);
+	y = 18.01485463946  + ( 0.00001792491 * y);
+	
+	return({ x: x,y: y});
+	
+}
+
 
 
 
@@ -187,6 +207,27 @@ $(document).ready(function() {
 	
 	// Init leafletmap
 	initMap();
+	
+	
+	// Choose WGS84 initially
+	
+	$('#coord_WGS84').addClass('selected');
+	
+	// Add event listener
+	
+	$('.checkbox').bind( "click", function(e) {  
+	
+		$('.selected').removeClass('selected');
+		$( this ).toggleClass( "selected" ); 
+		
+		if ( $(this).attr('id')  ) {
+			
+			//alert('Koordinaatit konvertoidaan WGS84-muotoon seuraavalla kaavalla:');
+			
+		}
+		
+	});
+	
 	
 	
 	enviromentalPermits=[];
@@ -207,6 +248,23 @@ $(document).ready(function() {
 			
 				enviromentalPermits=parsiCSV(reader.result);
 				
+				
+				//  Coord conversion if necessary
+				if ( $('.selected').attr('id') == 'coord_EPSG3067') {
+					alert('Koordinaatit konvertoidaan WGS84-muotoon seuraavilla kaavoilla: 	\n -3.04805394167 + ( 0.00000947239 * pkoord) \n	18.01485463946 + ( 0.00001792491 * ikoord)');
+					
+					for (var i=0;i<enviromentalPermits.length;i++) {
+						
+						tmp = coordConversion( enviromentalPermits[i].lat, enviromentalPermits[i].lon );
+						
+						enviromentalPermits[i].lat = tmp.x;
+						enviromentalPermits[i].lon = tmp.y;
+						
+						
+					}
+					
+
+				}				
 				// Set map focus based on mean of lon & lat
 				
 				lon_mean = enviromentalPermits.map(function(x) { return(x['lon']) }).reduce(function(x,y) {  return x+y; }) / enviromentalPermits.length;
