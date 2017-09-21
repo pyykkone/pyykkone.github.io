@@ -6,6 +6,7 @@ var markers;
 
 var help;
 
+
 // Functions
 
 
@@ -108,7 +109,9 @@ function mapPermits(permits) {
 		x=item['lat']//[1];
 		
 		marker=L.marker([x, y],riseOnHover=true ).bindPopup(popUpString)
-		.on('mouseover',   function() { markerClick(item['rowID']) })
+		.on('mouseover',   function() { markerClick(item['rowID']); console.log(item['rowID']); })
+		
+		marker['rowId'] = item['rowID'];
 		markersLayer.addLayer(marker); 
 	});
 	
@@ -167,7 +170,7 @@ function parsiCSV(textRaw) {
 				}
 				
 		}
-		// Add id based in index to identity each marker
+		// Add id based on index to identity each marker
 		rtrn['rowID'] = mapIndex;
 		 return(rtrn);
 	 });
@@ -227,10 +230,40 @@ $(document).ready(function() {
 		}
 		
 	});
+	// Add eventlistener to searchbox
+	
+	//$('#searchBox').click( function(x) { console.log('this!'); $(this).attr('value')=''; });
 	
 	
+	$('#searchBox').keydown(function(e) {
+						if (e['keyCode']==13) { // Enter
+							console.log('KEY DOWN');
+							hakusana = $(this)[0].value;
+							
+							
+							tulokset = enviromentalPermits.filter(function(x) { return(x['dnro'].indexOf(hakusana)>-1) });
+							
+							console.log(tulokset.length);
+							if (tulokset.length==0) { 
+								alert('No permits found');
+							};
+
+							map.eachLayer(function(x){
+								console.log(x.rowId)
+											if (x.rowId==tulokset[0].rowID) { x.openPopup()  }
+										});
+							
+							
+							markerClick(tulokset[0].rowID);
+							
+						}
+	})
+	
+	
+	//enviromentalPermits.filter(function(x) { return(x['dnro'].indexOf(hakusana)>-1) })
 	
 	enviromentalPermits=[];
+	
 	
 	// Plot permits on map 
 	// mapPermits(enviromentalPermits);

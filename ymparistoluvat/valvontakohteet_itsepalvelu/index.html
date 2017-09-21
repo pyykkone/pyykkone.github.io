@@ -25,12 +25,17 @@ crossorigin=""></script>
 
 	<div id="inputContainer">
 	<div id="fileInputContainer"><input type="file" id="fileInput" class="inputfile" >
-	<label for="fileInput">Lisää valvontakohteet</label></div>
+	<label for="fileInput">Lisää valvontakohteet</label>
+	</div>
 	<br>
 	<p class='checkbox' id='coord_WGS84'>WGS84</p>
 	<p class='checkbox' id='coord_EPSG3067'>ETRS89 / TM35FIN<p/>
-
+	<br>
+	
 	</div>
+	<!--<p>Etsi diaarinumerolla (tai sen osalla esim. 1625)</p>   onclick="this.value=''"-->
+	<input type="text"  id='searchBox'  value='Etsi diaarinumerolla (tai sen osalla esim. 1625) ja paina ENTER' onclick="this.value=''" size='50'></input>
+	
 	
 	<div id='infoContainer'>
 	
