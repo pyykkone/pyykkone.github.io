@@ -59,12 +59,15 @@ ul {
 	margin: 5px;
 	padding: 5px;
 	margin-top : 10px;
+	background-color:  #66ff66;
 	margin-left: 15px;
 	font-family: "Courier New", Courier, monospace;
+	
 	
 }
 .checkbox.selected {
 	
+	background-color: #00cc00;
 	border: solid;
 	border-color: black;
 }

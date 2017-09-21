@@ -1,0 +1,80 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+<script src="filelist.json"></script>
+
+<script>
+
+
+function listPictures(files) { 
+
+			for (var i=0;i<files.length;i++) {
+				console.log('For-loop:'+i);
+				
+				
+				
+				
+				if (files[i].indexOf('.html')>-1) {
+				
+
+				} else {
+					// Assumption that if not html then image
+					
+					var imageBoxToAdd   = $('<div></div>').addClass('imageBox');
+					
+					var imgToAdd = $('<img src="'+files[i]+'">')//.addClass('responsive')//.css('width','80px').css('height','60px').;
+					
+					imageBoxToAdd.append(imgToAdd);
+					// Explanatory text
+					
+					var textBoxToAdd = $('<div><p>'+texts[i]+'</p></div>').addClass('textBox');
+					
+					// Box
+					
+					var boxToAdd = $('<div></div>').addClass('box');
+					
+					
+					
+					boxToAdd.append(textBoxToAdd);
+					boxToAdd.append(imageBoxToAdd);
+					
+					
+					
+					$('#content').append(boxToAdd);
+				} // End else 
+			}
+
+}
+
+
+
+
+$(document).ready(function() {
+    console.log( "ready!" );
+	
+	
+	
+	listPictures(files);
+	
+	$('table').on('click',function() {  $(this).toggleClass('selected') });
+	$('img').on('click',function() {  $(this).toggleClass('selected') });
+	
+});
+
+
+</script>
+
+<link rel="stylesheet" type="text/css" href="styles.css">
+
+
+</head>
+<body>
+
+
+<div id='content'></div>
+
+
+</body>
+</html>
+
