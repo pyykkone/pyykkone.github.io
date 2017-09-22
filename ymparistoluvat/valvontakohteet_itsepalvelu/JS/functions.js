@@ -50,9 +50,9 @@ function markerClick(markerID) {
 	
 	props = Object.getOwnPropertyNames(marker);
 	
-	help = props;
 	
-	props = props.filter(function(x) { return(x!='lon' & x!='lat' & x!='rowID' ) })
+	
+	props = props.filter(function(x) { return(x!='lon' & x!='lat' & x!='rowID' & x!='searchString' ) })
 	
 	// Get rid of weird lat
 	props = props.filter(function(x) { return( !(x.substr(0,3)=='lat' & x.length==4 )) })
@@ -109,7 +109,7 @@ function mapPermits(permits) {
 		x=item['lat']//[1];
 		
 		marker=L.marker([x, y],riseOnHover=true ).bindPopup(popUpString)
-		.on('mouseover',   function() { markerClick(item['rowID']); console.log(item['rowID']); })
+		.on('mouseover',   function() { markerClick(item['rowID']);  })
 		
 		marker['rowId'] = item['rowID'];
 		markersLayer.addLayer(marker); 
@@ -147,11 +147,17 @@ function parsiCSV(textRaw) {
 		// Empty object
 		rtrn = {}
 		
+		rtrn['searchString'] = '';
+		
 		// Add cols
 		for (var i=0;i<cols.length;i++) {
 				
 				// Add properties to object from each column
 				rtrn[cols[i]] = x.split(';')[i];
+				
+				// Add property to search string enabling the search
+				rtrn['searchString'] += x.split(';')[i];
+				
 				
 				// Convert coordinates to numbers
 				if (cols[i]=='lon') {					
@@ -172,7 +178,9 @@ function parsiCSV(textRaw) {
 		}
 		// Add id based on index to identity each marker
 		rtrn['rowID'] = mapIndex;
-		 return(rtrn);
+		
+		
+		return(rtrn);
 	 });
 
 	// Drop first of array as is object derived of columns
@@ -238,10 +246,15 @@ $(document).ready(function() {
 	$('#searchBox').keydown(function(e) {
 						if (e['keyCode']==13) { // Enter
 							console.log('KEY DOWN');
-							hakusana = $(this)[0].value;
+							hakusana = $(this)[0].value.toLowerCase();
 							
 							
-							tulokset = enviromentalPermits.filter(function(x) { return(x['dnro'].indexOf(hakusana)>-1) });
+							// Search
+							tulokset = enviromentalPermits.filter(function(x) { return(x['searchString'].toLowerCase().indexOf(hakusana)>-1) });
+							// Get ids of results
+							tulokset = tulokset.map(function(x) { return(x['rowID']) })
+							
+							help = tulokset;
 							
 							console.log(tulokset.length);
 							if (tulokset.length==0) { 
@@ -249,12 +262,16 @@ $(document).ready(function() {
 							};
 
 							map.eachLayer(function(x){
-								console.log(x.rowId)
-											if (x.rowId==tulokset[0].rowID) { x.openPopup()  }
+								
+											//if (x.rowId==tulokset[0].rowID) { x.openPopup()  }
+											if (tulokset.indexOf(x.rowId)>-1) {
+												x.openPopup();
+												//x.valueOf()._icon.style.fill = 'green';
+											}
 										});
 							
 							
-							markerClick(tulokset[0].rowID);
+							markerClick(tulokset[0]);
 							
 						}
 	})
