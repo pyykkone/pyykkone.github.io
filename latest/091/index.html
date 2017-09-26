@@ -88,7 +88,8 @@
 
 <!--List of images -->
 <script src="filelist.json"></script>
-
+<!--MetaInfo -->
+<script src="metat.json"></script>
 
 <!-- Initialize the deck. You can put this in an external file if desired. -->
 <script>
@@ -97,8 +98,14 @@
 
   $(function() {
 	
+	// Alter meta
+	$('title')[0].innerHTML =  reportMeta['kuntaNimi'] + ' \\ ' +  $('title')[0].innerHTML ;
+	
 	files = files.filter(function(x)  {  return(x.indexOf('.png')>-1) });
-  
+	
+	
+	// Add title slide
+	$('#slideContainer').append('<section class="slide"><h2>' + reportMeta['kuntaNimi'] + '</h2><h1>Työttömyystilanne<br> ' + reportMeta['kuukausi'] + ' / ' +  reportMeta['vuosi'] + '</h1></section>')
   
 	files.map(function(x) {
 	
