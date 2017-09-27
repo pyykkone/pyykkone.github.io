@@ -1,0 +1,56 @@
+
+html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                background-color: violet;
+            }
+
+table {
+	margin: 15%;
+	
+}
+	
+ul {  
+
+	margin : 15%;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 28;
+	list-style-type: circle;
+	
+
+}	
+			
+			
+
+// Containers
+
+#container {
+	background-color: red;
+	width: 100%;
+	height: 100%;
+    margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+#mapContainer {
+	background-color: green;
+	width: 50%;
+	height: 100%;
+    margin: 0;
+	padding: 0;
+	float: left;
+	position: relative;
+}
+
+#infoContainer {
+	background-color: white;
+	width: 50%;
+	height: 100%;
+	float: right;
+    margin: 0;
+	padding: 0;
+	position: relative;
+}
