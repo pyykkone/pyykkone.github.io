@@ -5,10 +5,9 @@ var map;
 var markers;
 
 
-// Functions
 
 
-function initMap(x=60.5,y=25) { 
+function initMap(x,y) { 
 
 	map = L.map('mapContainer');
 	
@@ -94,7 +93,7 @@ function mapPermits(permits) {
 $(document).ready(function() {
 	
 	// Init leafletmap
-	initMap();
+	initMap(60.5,25);
 	
 	// Load permits from example .js file by adding a script element to document
 	/*
