@@ -1,0 +1,54 @@
+
+
+body, html {
+
+	
+	
+}
+
+#content {
+	width:60%;
+	height: 100%;
+	float:left;
+}
+
+#info {
+	width:35%;
+	height: 100%;
+	float:right;
+}
+
+
+#map {
+	width:100%;
+	height: 100%;
+	float:left;
+	position: relative;
+}
+
+#intro {
+    position: relative;
+    height: 100px;
+    background: #ccc;
+    }
+#intro div{
+    position: absolute;
+    top: 40px;
+    width: 100px;
+    }
+
+
+.infoYear {
+	
+	padding-top:40%;
+	font-size: 80;
+}
+
+#loadingText {
+	padding-top:40%;
+	font-size: 80;
+}
+
+info div.infoYear:first-child {
+    top: 20px;
+ }
