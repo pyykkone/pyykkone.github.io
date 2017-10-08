@@ -5,9 +5,12 @@ $(document).ready(function() {
 
 
 	yearsArr = [1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015]//[1987,1988,1989,1990,1991,1992];
+	//yearsArr = [1997,2015]
+	// Remove
 	
-	
-	
+	g = $('g');
+	g.splice(0, 2)
+	g.filter(function(x) { $(this).attr('postinumero').substring(0,1)=='0' })
 	
 	for (var i=0;i<yearsArr.length;i++) {
 		
@@ -47,9 +50,16 @@ $(document).ready(function() {
 			
 			if (tmp.length>0) {
 				$(this).css('fill',   tmp[0]['luokka']  ) 
-			}
 			
-		
+			
+				if (year==2015) {
+					$(this).append('<div>'+tmp[0]['arvo']+'</div>');
+					
+					$(this).click(function() {
+						alert('Postinumero: '+$(this).attr('postinumero')+', arvo: ' + $(this).children('div')[0].innerHTML );
+					});
+				}
+			}
 		});
 		
 	}
@@ -62,7 +72,7 @@ $(document).ready(function() {
 	
 	$( ".infoYear" ).eq(0).show( "slow", function showNext() {
 			
-			$( this ).next( ".infoYear" ).delay(1000).show( 'slow', showNext );
+			$( this ).next( ".infoYear" ).delay(1).show( 'slow', showNext );
 			$( this ).prev( ".infoYear" ).hide('fast');
 			
 			
