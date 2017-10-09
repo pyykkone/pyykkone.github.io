@@ -2,9 +2,16 @@
 
 body, html {
 
-	
+	 font-family: monospace;
 	
 }
+
+h1 {
+	float:left;
+	padding-left: 25%;
+	padding-bottom: 5%;
+}
+
 
 #content {
 	width:60%;
